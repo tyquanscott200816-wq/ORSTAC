@@ -1,106 +1,207 @@
-﻿<xml xmlns="http://www.w3.org/1999/xhtml" collection="true">
-  <block type="tick_analysis" id="z2JjYpxl$9,Ht@e6M6wK">
-    <statement name="TICKANALYSIS_STACK">
-      <block type="variables_set" id="-)Ct^jJy(oX^w+MsP.)I">
-        <field name="VAR" id="xhl!9)@QRuHCj~1lGG81" variabletype="">close 2</field>
+<?xml version="1.0" encoding="UTF-8"?>
+<xml xmlns="https://developers.google.com/blockly/xml">
+
+  <!-- VARIABLES -->
+  <variables>
+    <variable id="odd_count">odd_count</variable>
+    <variable id="stake">stake</variable>
+    <variable id="base_stake">base_stake</variable>
+    <variable id="martingale">martingale</variable>
+    <variable id="take_profit">take_profit</variable>
+    <variable id="stop_loss">stop_loss</variable>
+  </variables>
+
+  <!-- TRADE PARAMETERS -->
+  <block type="trade" id="trade" x="10" y="10">
+    <field name="MARKET">synthetic_index</field>
+    <field name="SYMBOL">R_10</field>
+    <field name="TRADETYPE">DIGITEVEN</field>
+    <field name="DURATIONTYPE">t</field>
+    <field name="DURATION">1</field>
+    <field name="AMOUNTTYPE">stake</field>
+    <value name="AMOUNT">
+      <block type="variables_get">
+        <field name="VAR">stake</field>
+      </block>
+    </value>
+  </block>
+
+  <!-- INITIALIZE -->
+  <block type="variables_set" x="10" y="150">
+    <field name="VAR">base_stake</field>
+    <value name="VALUE">
+      <block type="math_number">
+        <field name="NUM">1</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set">
+        <field name="VAR">stake</field>
         <value name="VALUE">
-          <block type="read_ohlc" id="]1:*9~_r^s~^JI!mRc=K">
-            <field name="OHLCFIELD_LIST">close</field>
-            <field name="CANDLEINTERVAL_LIST">60</field>
-            <value name="CANDLEINDEX">
-              <shadow type="math_number" id="l}/{*NG4Ak^K]?sv(FsL">
-                <field name="NUM">2</field>
-              </shadow>
-            </value>
+          <block type="variables_get">
+            <field name="VAR">base_stake</field>
           </block>
         </value>
         <next>
-          <block type="notify" id="j|0Q[k/WkTC)a_iXcu3y">
-            <field name="NOTIFICATION_TYPE">success</field>
-            <field name="NOTIFICATION_SOUND">silent</field>
-            <value name="MESSAGE">
-              <shadow type="text" id="1~-^N|n^v{QOPt$v^R?G">
-                <field name="TEXT">abc</field>
-              </shadow>
-              <block type="text_join" id="p{H.v8=yN-X6B?KUD82_">
-                <mutation items="2"></mutation>
-                <value name="ADD0">
-                  <block type="text" id="C_u?]*#Z.h]Gr,`z64yq">
-                    <field name="TEXT">CLOSE2 :</field>
-                  </block>
-                </value>
-                <value name="ADD1">
-                  <block type="variables_get" id="SW|.:EAV`KU-1|hJ?xad">
-                    <field name="VAR" id="xhl!9)@QRuHCj~1lGG81" variabletype="">close 2</field>
-                  </block>
-                </value>
+          <block type="variables_set">
+            <field name="VAR">martingale</field>
+            <value name="VALUE">
+              <block type="math_number">
+                <field name="NUM">1.5</field>
               </block>
             </value>
             <next>
-              <block type="variables_set" id="(fT4j4FiY6g*WxbF(IP0">
-                <field name="VAR" id="nw$=zM#B6a4A#0aAzhF[" variabletype="">open1</field>
+              <block type="variables_set">
+                <field name="VAR">odd_count</field>
                 <value name="VALUE">
-                  <block type="read_ohlc" id="yfx0j4Pz5^tIZEJ#K{2K">
-                    <field name="OHLCFIELD_LIST">open</field>
-                    <field name="CANDLEINTERVAL_LIST">default</field>
-                    <value name="CANDLEINDEX">
-                      <shadow type="math_number" id="+0nZtnUTNA;;/b$N`*c2">
-                        <field name="NUM">1</field>
-                      </shadow>
-                    </value>
+                  <block type="math_number">
+                    <field name="NUM">0</field>
                   </block>
                 </value>
-                <next>
-                  <block type="notify" id="vb_):RzOOzCK3Bf#P7f[">
-                    <field name="NOTIFICATION_TYPE">success</field>
-                    <field name="NOTIFICATION_SOUND">silent</field>
-                    <value name="MESSAGE">
-                      <shadow type="text" id="1~-^N|n^v{QOPt$v^R?G">
-                        <field name="TEXT">abc</field>
-                      </shadow>
-                      <block type="text_join" id="cnWq)ULq`^GIaHe!J*7_">
-                        <mutation items="2"></mutation>
-                        <value name="ADD0">
-                          <block type="text" id="TH297@PZJkGcaZXBRb)D">
-                            <field name="TEXT">OPEN1 :</field>
-                          </block>
-                        </value>
-                        <value name="ADD1">
-                          <block type="variables_get" id="YMA^+=L;:bsh@t8jwK23">
-                            <field name="VAR" id="nw$=zM#B6a4A#0aAzhF[" variabletype="">open1</field>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="notify" id="0GF;8b9BlC#orPe.4_,}">
-                        <field name="NOTIFICATION_TYPE">success</field>
-                        <field name="NOTIFICATION_SOUND">silent</field>
-                        <value name="MESSAGE">
-                          <shadow type="text" id="[d:3pY}HWhun8}1r$`j2">
-                            <field name="TEXT">abc</field>
-                          </shadow>
-                          <block type="text_join" id="{wVl7[%c/aHFS+w16-@6">
-                            <mutation items="2"></mutation>
-                            <value name="ADD0">
-                              <block type="text" id="|Ikp(L*yVYVV$ZK1.~7N">
-                                <field name="TEXT">SPOT:</field>
-                              </block>
-                            </value>
-                            <value name="ADD1">
-                              <block type="tick" id="p8}EAQ`jMnZ.ij+tsj4;"></block>
-                            </value>
-                          </block>
-                        </value>
-                      </block>
-                    </next>
-                  </block>
-                </next>
               </block>
             </next>
           </block>
         </next>
       </block>
+    </next>
+  </block>
+
+  <!-- TICK ANALYSIS -->
+  <block type="tick" x="300" y="10">
+    <statement name="TICK">
+      
+      <!-- CHECK IF ODD -->
+      <block type="controls_if">
+        <value name="IF0">
+          <block type="math_modulo">
+            <value name="DIVIDEND">
+              <block type="last_digit"></block>
+            </value>
+            <value name="DIVISOR">
+              <block type="math_number">
+                <field name="NUM">2</field>
+              </block>
+            </value>
+          </block>
+        </value>
+
+        <!-- ODD -->
+        <statement name="DO0">
+          <block type="variables_set">
+            <field name="VAR">odd_count</field>
+            <value name="VALUE">
+              <block type="math_arithmetic">
+                <field name="OP">ADD</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR">odd_count</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+
+        <!-- EVEN -->
+        <statement name="ELSE">
+          <block type="variables_set">
+            <field name="VAR">odd_count</field>
+            <value name="VALUE">
+              <block type="math_number">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+
+      <!-- ENTRY CONDITION -->
+      <block type="controls_if">
+        <value name="IF0">
+          <block type="logic_compare">
+            <field name="OP">GTE</field>
+            <value name="A">
+              <block type="variables_get">
+                <field name="VAR">odd_count</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number">
+                <field name="NUM">2</field>
+              </block>
+            </value>
+          </block>
+        </value>
+
+        <statement name="DO0">
+          <block type="purchase">
+            <field name="CONTRACT">DIGITEVEN</field>
+          </block>
+        </statement>
+      </block>
+
     </statement>
   </block>
+
+  <!-- AFTER TRADE -->
+  <block type="after_trade" x="600" y="10">
+    <statement name="AFTER">
+
+      <!-- IF WIN -->
+      <block type="controls_if">
+        <value name="IF0">
+          <block type="result_win"></block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set">
+            <field name="VAR">stake</field>
+            <value name="VALUE">
+              <block type="variables_get">
+                <field name="VAR">base_stake</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set">
+                <field name="VAR">odd_count</field>
+                <value name="VALUE">
+                  <block type="math_number">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+
+        <!-- IF LOSS -->
+        <statement name="ELSE">
+          <block type="variables_set">
+            <field name="VAR">stake</field>
+            <value name="VALUE">
+              <block type="math_arithmetic">
+                <field name="OP">MULTIPLY</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR">stake</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="variables_get">
+                    <field name="VAR">martingale</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+
+    </statement>
+  </block>
+
 </xml>
